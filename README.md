@@ -3,6 +3,8 @@ a python program to interact with discord
 
 you will need to edit config.json to include your bots token, optionally you can create shortcuts, useful for channel and user id's
 
+uses py-cord library which requires an alternative audioop package such as `audioop-lts` as it has been removed from the standard library
+
 commands:
 help - show this list
 dm [userid] [message] - send a dm to a user
