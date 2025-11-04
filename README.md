@@ -9,6 +9,8 @@ commands:
 help - show this list
 dm [userid] [message] - send a dm to a user
 read [userid] print dm history with a user
+readc [channelid] print message history of a channel
+channels [serverid] list all channels in a server
 send [channelid] [message] - send a message to a channel
 reply [channelid] [messageid] [message] reply to a message
 delete [channelid] [messageid] - delete a message
