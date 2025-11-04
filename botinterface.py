@@ -41,6 +41,22 @@ async def processCommand(command):
             for x in messages[::-1]:
                 print(f"[{x.created_at}] {x.author}: {x.content}")
             lastCommand = command[0:1]
+        case "readc":
+            channel = bot.get_channel(dictOrInput(shortcuts,command[1]))
+            messages = [message async for message in channel.history(limit=100,oldest_first=False)]
+            for x in messages[::-1]:
+                print(f"[{x.created_at}] {x.author}: {x.content}")
+            lastCommand = command[0:1]
+        case "channels":
+            server = bot.get_guild(dictOrInput(shortcuts,command[1]))
+            if server is None:
+                server = await bot.fetch_guild(dictOrInput(shortcuts,command[1]))
+            channels = await server.fetch_channels()
+            print(server.name)
+            for channel in channels:
+                if isinstance(channel, discord.TextChannel):
+                    print(f"{channel.name} - {channel.id}")
+            lastCommand = command[0:1]
         case "delete":
             channel = await bot.fetch_channel(dictOrInput(shortcuts, command[1]))
             message = await channel.fetch_message(int(command[2]))
@@ -92,6 +108,8 @@ async def processCommand(command):
             help - show this
             dm [userid] [message] - send a dm to a user
             read [userid] print dm history with a user
+            readc [channelid] print message history of a channel
+            channels [serverid] list all channels in a server
             send [channelid] [message] - send a message to a channel
             reply [channelid] [messageid] [message] reply to a message
             delete [channelid] [messageid] - delete a message
